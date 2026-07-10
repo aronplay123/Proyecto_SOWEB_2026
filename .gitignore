@@ -1,0 +1,18 @@
+# Ignorar dependencias pesadas de Angular
+**/node_modules/
+**/dist/
+**/.angular/
+
+# Ignorar archivos generados de Spring Boot / Maven
+**/target/
+**/.mvn/
+**/*.class
+
+# Ignorar configuraciones locales del editor e IDES
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
