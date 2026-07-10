@@ -1,0 +1,74 @@
+<div style="padding: 30px; font-family: sans-serif; background-color: #f8f9fa; min-height: 100vh;">
+  
+  <h1 style="color: #2c3e50;">TechAcademy Pro - Emisión de Certificados</h1>
+  <hr style="border: 1px solid #dee2e6;">
+
+  <div style="background: white; padding: 20px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin-bottom: 30px;">
+    
+    <h3 *ngIf="!esEdicion" style="color: #28a745;">Emitir Nuevo Certificado Profesional</h3>
+    <h3 *ngIf="esEdicion" style="color: #007bff;">Modificar Certificado Existente (ID: {{nuevoCertificado.id}})</h3>
+    
+    <div style="display: flex; flex-wrap: wrap; gap: 15px; align-items: center;">
+      <input type="text" [(ngModel)]="nuevoCertificado.alumnoNombre" placeholder="Nombre del Alumno" style="padding: 10px; width: 250px; border: 1px solid #ccc; border-radius: 4px;">
+      <input type="text" [(ngModel)]="nuevoCertificado.codigoVerificacion" placeholder="Código Único (Ej. CERT-001)" style="padding: 10px; width: 200px; border: 1px solid #ccc; border-radius: 4px;">
+      <input type="number" [(ngModel)]="nuevoCertificado.notaFinal" placeholder="Nota Final" style="padding: 10px; width: 100px; border: 1px solid #ccc; border-radius: 4px;">
+      
+      <select [(ngModel)]="nuevoCertificado.idEmpresa" style="padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+        <option [value]="1">Interbank Corporación</option>
+        <option [value]="2">Alicorp Soluciones</option>
+        <option [value]="3">Saga Falabella Tecnologías</option>
+      </select>
+
+      <select [(ngModel)]="nuevoCertificado.idCurso" style="padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+        <option [value]="1">Desarrollo Full Stack (Angular+Spring)</option>
+        <option [value]="2">Microservicios Cloud Native</option>
+        <option [value]="3">Ingeniería de Datos MySQL</option>
+      </select>
+
+      <button (click)="guardar()" [style.background-color]="esEdicion ? '#007bff' : '#28a745'" style="padding: 10px 20px; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold;">
+        {{ esEdicion ? 'Actualizar Registro' : 'Confirmar Emisión' }}
+      </button>
+
+      <button *ngIf="esEdicion" (click)="cancelarEdicion()" style="padding: 10px 20px; background-color: #6c757d; color: white; border: none; border-radius: 4px; cursor: pointer;">
+        Cancelar
+      </button>
+    </div>
+  </div>
+
+  <h3>Directorio Nacional de Profesionales Certificados (Consulta Libre)</h3>
+  
+  <table style="width: 100%; border-collapse: collapse; background: white; box-shadow: 0 4px 6px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden;">
+    <thead>
+      <tr style="background-color: #343a40; color: white; text-align: left;">
+        <th style="padding: 15px;">ID</th>
+        <th style="padding: 15px;">Estudiante</th>
+        <th style="padding: 15px;">Código Verificación</th>
+        <th style="padding: 15px;">Nota</th>
+        <th style="padding: 15px;">Empresa Patrocinadora</th>
+        <th style="padding: 15px;">Especialización Cursada</th>
+        <th style="padding: 15px;">Acciones Admin</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let cert of listaCertificados" style="border-bottom: 1px solid #dee2e6;">
+        <td style="padding: 15px;">{{ cert.id }}</td>
+        <td style="padding: 15px; font-weight: bold;">{{ cert.alumnoNombre }}</td>
+        <td style="padding: 15px;">{{ cert.codigoVerificacion }}</td>
+        <td style="padding: 15px; color: #28a745; font-weight: bold;">{{ cert.notaFinal }}</td>
+        <td style="padding: 15px; color: #17a2b8;">{{ cert.razonSocial }}</td>
+        <td style="padding: 15px; font-style: italic;">{{ cert.nombreCurso }}</td>
+        <td style="padding: 15px;">
+          <button (click)="seleccionarParaEditar(cert)" style="background-color: #ffc107; color: #212529; border: none; padding: 6px 12px; cursor: pointer; border-radius: 4px; margin-right: 5px;">
+            Editar
+          </button>
+          <button (click)="borrar(cert.id)" style="background-color: #dc3545; color: white; border: none; padding: 6px 12px; cursor: pointer; border-radius: 4px;">
+            Eliminar
+          </button>
+        </td>
+      </tr>
+      <tr *ngIf="listaCertificados.length === 0">
+        <td colspan="7" style="text-align: center; padding: 20px; color: #6c757d;">No hay certificaciones registradas en el servidor.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
