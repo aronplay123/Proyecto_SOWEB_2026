@@ -67,7 +67,7 @@ INSERT INTO certificados (alumno_nombre, codigo_verificacion, nota_final, id_emp
 ('Carlos Mendoza Ortiz', 'CERT-2026-001', 18.5, 1, 1),
 ('Gabriela Villar Saavedra', 'CERT-2026-002', 19.0, 1, 2),
 ('Adrian Henry Ramos', 'CERT-2026-003', 16.0, 2, 1),
-('Pamela Vásquez Castro', 'CERT-2026-004', 17.5, 3, 3);
+('Pamela Vasquez Castro', 'CERT-2026-004', 17.5, 3, 3);
 
 -- Registro semilla de Seguridad: Usuario Administrador
 -- Credenciales en texto plano: Username = admin / Password = password123
